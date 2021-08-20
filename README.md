@@ -136,4 +136,18 @@ calls -> Increased latency -> Asynchronous Programming with CompletableFuture
   
   - Invoking parallelStream() does not guarantee faster performance.
   - As the API performs lot of additional steps (splitting, executing etc.) compared to Sequential.
-  
+
+
+- How does Parallel Stream maintain Final Result Order ?
+  - Depends on Type of Collection
+  - And on spliterator implementation of the collection.
+  - Example -
+    - ArrayList - Ordered Collection and has Ordered Spliterator Impl.
+    - Set - Unordered Collection and has Unordered Spliterator Impl.
+  - For Unordered Collections - Order is **NOT** maintained in the result post applying stream - so we have to careful when choosing the Collection on which we have to apply ParallelStreams.
+
+```java
+[main] - inputList == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+[main] - resultList == [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+[main] - inputSet == [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+[main] - resultSet == [16, 18, 2, 20, 4, 6, 8, 10, 12, 14]```
