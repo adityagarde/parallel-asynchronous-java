@@ -33,4 +33,4 @@ nbdist/
 # IntelliJ
 /out/
 
-gradle.yml
+.github/workflows/gradle.yml
