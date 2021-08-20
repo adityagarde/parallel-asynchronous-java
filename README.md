@@ -127,3 +127,13 @@ calls -> Increased latency -> Asynchronous Programming with CompletableFuture
   - Combine
     - Combine the executed results into a final result - terminal operations.
     - Uses collect() and reduce() functions.
+  
+
+- ArrayList and LinkedList Comparison of Spliterator
+  - For ArrayList the parallel execution is slightly better than Sequential Execution. 
+  - Because ArrayList is an Indexed Collection, and the Spliterator can slice the data easily in smaller chunks.
+  - For LinkedList the Parallel execution is considerably slow, and the LinkedList can't be split easily.
+  
+  - Invoking parallelStream() does not guarantee faster performance.
+  - As the API performs lot of additional steps (splitting, executing etc.) compared to Sequential.
+  
