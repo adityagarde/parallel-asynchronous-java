@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group 'com.learnjava'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+test {
+    useJUnitPlatform() // enables Junit5
+}
+
+dependencies {
+
+    //lombok
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+
+    // StopWatch
+    implementation('org.apache.commons:commons-lang3:3.0')
+
+    //junit5-dependencies
+    testImplementation('org.junit.jupiter:junit-jupiter:5.5.1')
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.2.4'
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.2.4'
+}
