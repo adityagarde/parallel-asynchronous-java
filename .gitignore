@@ -33,3 +33,4 @@ nbdist/
 # IntelliJ
 /out/
 
+gradle.yml
