@@ -1,9 +1,9 @@
-## Parallel and Async Programming
+## Parallel and Asynchronous Programming
 
 Hardware Side -> Multiple Cores -> Better utilization -> Parallel Programming with Streams Software Side -> Blocking I/O
 calls -> Increased latency -> Asynchronous Programming with CompletableFuture
 
-###Concurrency and Parallelism
+### Concurrency and Parallelism
 
 - Concurrency
     - Concept where two or more tasks can run simultaneously.
@@ -104,7 +104,7 @@ calls -> Increased latency -> Asynchronous Programming with CompletableFuture
     - parallel() - Executes the stream in parallel.
     - These two when called i between - change the flow of the whole pipeline.
     - The last function call - determines whether it will be sequential or parallel execution.
-```aidl
+```
        namesList.parallelStream()
                 .map(this::addNameLengthTransform)
                 .sequential()
