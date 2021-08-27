@@ -146,8 +146,33 @@ calls -> Increased latency -> Asynchronous Programming with CompletableFuture
     - Set - Unordered Collection and has Unordered Spliterator Impl.
   - For Unordered Collections - Order is **NOT** maintained in the result post applying stream - so we have to careful when choosing the Collection on which we have to apply ParallelStreams.
 
-```java
-[main] - inputList == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-[main] - resultList == [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
-[main] - inputSet == [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-[main] - resultSet == [16, 18, 2, 20, 4, 6, 8, 10, 12, 14]```
+```groovy
+inputList == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+resultList == [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+inputSet == [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+resultSet == [16, 18, 2, 20, 4, 6, 8, 10, 12, 14]
+```
+
+- Collect() and Reduce() - Terminal Operations in Stream API
+  - Terminal Operation means after execution they produce a single result.
+  - Collect() 
+    - Result is produced in a mutable fashion.
+    - collect(toList()), collect(toSet()) etc.
+  - Reduce()
+    - Result is produces in an immutable fashion.
+    - Reduce computation to a single value. Ex - reduce(0, (x,y)->x+y);
+    - Works with data pair.
+- When dealing with string operations - Collect is a better option, it internally uses StringBuilder, while reduce ends up creating a bunch of unwanted strings.
+  - Example can be checked [here](https://github.com/adityagarde/parallel-asynchronous-java/blob/main/src/main/java/com/learnjava/parallelstreams/CollectVsReduce.java).
+- Identity value in s reduce function is a value which when used in a result, does not alter the result.
+  - Use reduce() for associative operations like addition (0) and multiplication (1).
+- Performance with using ParallelStream may not always be great. Also, Boxing and UnBoxing will lower the performance.
+- To avoid Deadlock scenario, the Common ForkJoin Pool involves the actual thread that initiated the transaction.
+- By default, Parallelism is number of CPU cores minus one. This can be changed by 2 ways.
+  - `System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "100");` - System Property
+  - `-Djava.util.concurrent.ForkJoinPool.common.parallelism=100` - Environment Variable
+- Parallel Streams do a lot of intermediate steps under the hood when compared to sequential streams.
+  - Thus use them only when splitting is easily possible. Ex- Don't use on Data structure like LinkedList.
+- Always compare the performance of sequential and parallel streams before choosing one.
+  - Parallel streams can be good when we have multiple cores available, there is lots of data and computations involved.
+  
