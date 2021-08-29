@@ -213,3 +213,22 @@ resultSet == [16, 18, 2, 20, 4, 6, 8, 10, 12, 14]
   - Used to Chain Asynchronous Methods.
   - Takes `Consumer` Functional Interface as Input and consumes the result of the previous.
   - Returns CompletableFuture< Void >
+  
+- `join()` blocks the current tread - AVOID it.
+
+- `thenApply()` - CompletionStage Method
+  - Transforms the data from one form to another.
+  - Input is Function Functional Interface
+  - Returns CompletableFuture< T >
+
+Example -
+```groovy
+CompletableFuture.supplyAsync(() -> helloWorldService.helloWorld())
+        .thenApply(str -> str.toUpperCase())
+        .thenAccept(s -> {
+          log("Result == " + s);
+        });
+log("Completed!");
+```
+- Completed is printed first and then the Result is presented.
+- This is executed in the common fork join pool.  
