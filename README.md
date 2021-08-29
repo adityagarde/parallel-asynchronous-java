@@ -175,4 +175,41 @@ resultSet == [16, 18, 2, 20, 4, 6, 8, 10, 12, 14]
   - Thus use them only when splitting is easily possible. Ex- Don't use on Data structure like LinkedList.
 - Always compare the performance of sequential and parallel streams before choosing one.
   - Parallel streams can be good when we have multiple cores available, there is lots of data and computations involved.
+
+### CompletableFuture
+
+- Asynchronous Reactive Functional Programming API.
+- Asynchronous Computations in a functional Style.
+- Introduced in Java8 to solve the limitations of Future API.
+
+- **Reactive Programming** -
+  1. **Responsive** 
+    - Fundamentally Asynchronous.
+    - For potential blocking calls like REST API or DB call, the call returns immediately and the response will be sent when its available.
+  2. **Resilient**
+    - Exception or error won't crash the app or code.
+  3. **Elastic**
+    - Asynchronous computations normally run in a pool of threads.
+    - The number of threads can go up or down based on the need.
+  4. **Message Driven**
+    - Asynchronous computations interact with eah through messages in an event-driven style.
+
+- CompletableFuture API Implementation - 
+  - Declaration -`public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {`
+  - Implements two interfaces - Future and CompletionStage.
+  - *Factory Methods* -
+    - Initiate asynchronous Computations.
+  - *Completion Stage Methods* -
+    - Chain Asynchronous Computations.
+  - *Exception Methods* -
+    - Handle Exceptions in an Asynchronous Computations.
   
+- `supplyAsync()` - FactoryMethod
+  - Initiate Asynchronous Computation.
+  - Takes `Supplier` Functional Interface as input.
+  - Returns CompletableFuture< T >()
+  
+- `thenAccept()` - CompletionStage Method
+  - Used to Chain Asynchronous Methods.
+  - Takes `Consumer` Functional Interface as Input and consumes the result of the previous.
+  - Returns CompletableFuture< Void >
