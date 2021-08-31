@@ -231,4 +231,17 @@ CompletableFuture.supplyAsync(() -> helloWorldService.helloWorld())
 log("Completed!");
 ```
 - Completed is printed first and then the Result is presented.
-- This is executed in the common fork join pool.  
+- This is executed in the common fork join pool.
+
+- `thenCombine()` - Completion Stage Method
+  - Used to Combine Independent Completable Futures.
+  - Takes two arguments - `CompletionStage` and `BiFunction`.
+  - BiFunction is a functional Interface which takes two parameters as input and one value as output.
+  - Returns a CompletableFuture.
+  
+- `thenCompose()` - Completion Stage Method.
+  - Transform the data from one form to another.
+  - Input is Function Functional Interface.
+  - Deals with functions that return CompletableFuture.
+  - diff - `thenApply()` deals with Function that returns a value.
+  - Returns CompletableFuture< T >
