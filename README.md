@@ -245,3 +245,47 @@ log("Completed!");
   - Deals with functions that return CompletableFuture.
   - diff - `thenApply()` deals with Function that returns a value.
   - Returns CompletableFuture< T >
+  
+
+- **Exception Handling** in CompletableFuture
+  - CompletableFuture code _can_ be put in a typical try and catch block, if any one service calls fails, the whole transaction fails.
+  - CompletableFuture API has a functional style of handling exceptions.
+  - 3 Options - `handle(), exceptionally(), whenComplete()`
+  - `handle()` and `exceptionally()` can catch Exception and Recover - which means we can catch the exception and provide a recoverable value rather than just throwing an exception.
+  - `whenComplete()` - can catch the exception, but doesn't provide any value, just throws it back to the caller.
+  1. `handle()` 
+       - Accepts a `BiFunction`. Thus, we can access both the result and function.
+       - It is invoked even when there is no exception, so have Null check for the exception object when using `handle()`.  
+            ```groovy
+              handle((res, ex) -> {
+                  if (null != ex) {
+                      log(ex.getMessage());
+                      return "Recover Hello";
+                  } else
+                      return res;
+              })
+            ```
+  2. `exceptionally()`
+      - Accepts a `Function`. We can pass only the exception object.
+      - It is invoked only when there is an exception and not always like `handle()`.
+      ```groovy
+          exceptionally(ex -> {
+              log(ex.getMessage());
+              return "Recover World";
+          })
+      ```
+      - This is like a compact try and catch block - as catch is invoked only when there is an exception.
+  3. `whenComplete()`
+      - Catches an exception but does not recover from the exception.
+      - When an exception occurs - the flow moves from Success path to Failure path (as expected) but doesn't recover and go back to Success path / flow but propagates to next `whenComplete()` call.
+      - Less used.
+      - Accepts a `BiConsumer` - i.e. takes 2 values but returns nothing.
+     
+```groovy
+    whenComplete((res, ex) -> {
+        if (null != ex) {
+            log(ex.getMessage());
+        }
+    })
+```
+

@@ -93,10 +93,21 @@ public class ProductServiceUsingCompletableFuture {
                             return productInfo;
                         });
 
-        CompletableFuture<Review> reviewCf = CompletableFuture.supplyAsync(() -> reviewService.retrieveReviews(productId));
+        CompletableFuture<Review> reviewCf = CompletableFuture
+                .supplyAsync(() -> reviewService.retrieveReviews(productId))
+                .exceptionally(ex -> {
+                    log("Exception in ReviewService == " + ex.getMessage());
+                    return Review.builder()
+                            .noOfReviews(0)
+                            .overallRating(0.0)
+                            .build();
+                });
 
         Product product = productInfoCf
                 .thenCombine(reviewCf, (productInfo, review) -> new Product(productId, productInfo, review))
+                .whenComplete((prod, ex) -> {
+                    log("Inside whenComplete == " + prod + " and the exception == " + ex);
+                })
                 .join();
 
         stopWatch.stop();
@@ -122,6 +133,12 @@ public class ProductServiceUsingCompletableFuture {
                 .stream()
                 .map(productOption -> {
                     return CompletableFuture.supplyAsync(() -> inventoryService.addInventory(productOption))
+                            .exceptionally(ex -> {
+                                log("Exception in updateInventoryAsync() - Returning Default Inventory");
+                                return Inventory.builder()
+                                        .count(1)
+                                        .build();
+                            })
                             .thenApply(inventory -> {
                                 productOption.setInventory(inventory);
                                 return productOption;

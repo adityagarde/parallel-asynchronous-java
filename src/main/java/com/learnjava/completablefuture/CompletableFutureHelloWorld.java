@@ -8,6 +8,7 @@ import static com.learnjava.util.CommonUtil.*;
 import static com.learnjava.util.LoggerUtil.log;
 
 public class CompletableFutureHelloWorld {
+
     public static void main(String[] args) {
         HelloWorldService helloWorldService = new HelloWorldService();
         CompletableFuture.supplyAsync(() -> helloWorldService.helloWorld())
