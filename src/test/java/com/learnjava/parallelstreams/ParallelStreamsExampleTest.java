@@ -36,7 +36,6 @@ class ParallelStreamsExampleTest {
         startTimer();
         List<String> resultList = parallelStreamsExample.stringTransform1(inputList, isParallel);
         timeTaken();
-        stopWatchReset();
 
         assertEquals(4, resultList.size());
         resultList.forEach(name -> {

@@ -20,7 +20,6 @@ public class LinkedListSpliteratorExample {
                                         .map(integer -> integer * multiplyValue)
                                         .collect(Collectors.toList());
         timeTaken();
-        stopWatchReset();
 
         return inputList;
     }
