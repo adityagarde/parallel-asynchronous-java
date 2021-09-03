@@ -1,7 +1,7 @@
 ## Parallel and Asynchronous Programming
 
-Hardware Side -> Multiple Cores -> Better utilization -> Parallel Programming with Streams Software Side -> Blocking I/O
-calls -> Increased latency -> Asynchronous Programming with CompletableFuture
+- Hardware Side -> Multiple Cores -> Better utilization -> **Parallel Programming with Streams**
+- Software Side -> Blocking I/O calls -> Increased latency -> **Asynchronous Programming with CompletableFuture**
 
 ### Concurrency and Parallelism
 
@@ -288,4 +288,40 @@ log("Completed!");
         }
     })
 ```
+
+- CompletableFuture - Thread Pool
+  - By default, CompletableFuture uses the Common ForkJoin Pool.
+  - The number of threads in the pool == number of cores.
+  - As ParallelStreams and CompletableFuture share the ForkJoin thread pool - there may be some issues like - thread is blocked by a time-consuming task OR thread not available at all.
+    - Solution - **User Defined ThreadPool**.
+  - This can be achieved using Executors Class. Passing the `ExecutorService` object in the overloaded SupplyAsync call.
+```groovy
+ExecutorService executorService 
+        = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+CompletableFuture<String> hello 
+        = CompletableFuture.supplyAsync(() -> helloWorldService.hello(), executorService);
+```
+<br/>
+
+- Overloaded `Async()` functions -
+  - thenCombineAsync()
+  - thenApplyAsync()
+  - thenComposeAsync()
+  - thenAcceptAsync()
+- Using these Async() functions allows us to change the thread of Execution.
+  - The CompletableFuture pipeline by default tries to keep the same thread of execution.
+  - This is done to avoid context switching, and the performance loss which it might bring.
+- Using these Async() methods is suggested when we have blocking operations in our CompletableFuture pipeline.
+- Calling these Async() functions does not guarantee that there will be switching of threads - but it is an instruction to JVM to switch the thread if it sees a blocking call.
+
+
+- Spring WebClient
+  - It is a Reactive Web Client introduced in Spring 5.
+  - Rest Client Library - Functional style RestClient (alternative to RestTemplate)
+  
+  
+- `allOf()` - Dealing with Multiple CompletableFutures
+- `anyOf()` - Use anyOf() when dealing with retrieving data from multiple DataSources.
+
+
 

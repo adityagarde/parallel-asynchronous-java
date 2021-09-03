@@ -29,6 +29,17 @@ dependencies {
     // StopWatch
     implementation('org.apache.commons:commons-lang3:3.0')
 
+    // Spring WebFlux
+    implementation 'org.springframework:spring-webflux:5.3.9'
+    implementation('io.projectreactor.netty:reactor-netty:1.0.9')
+
+    //jackson dependencies
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.4'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.12.4'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.4'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.4'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.12.4'
+
     //junit5-dependencies
     testImplementation('org.junit.jupiter:junit-jupiter:5.5.1')
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.2.4'

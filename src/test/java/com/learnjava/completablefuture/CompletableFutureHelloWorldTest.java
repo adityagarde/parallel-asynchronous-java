@@ -47,6 +47,34 @@ class CompletableFutureHelloWorldTest {
     }
 
     @Test
+    void helloWorldThreeAsyncCallsLog() {
+        String helloWorld = completableFutureHelloWorld.helloWorldThreeAsyncCallsLog();
+
+        assertEquals("HELLO WORLD! HI, INSIDE COMPLETABLE FUTURE!", helloWorld);
+    }
+
+    @Test
+    void helloWorldThreeAsyncCalls_CustomThreadPool() {
+        String helloWorld = completableFutureHelloWorld.helloWorldThreeAsyncCalls_CustomThreadPool();
+
+        assertEquals("HELLO WORLD! HI, INSIDE COMPLETABLE FUTURE!", helloWorld);
+    }
+
+    @Test
+    void helloWorldThreeAsyncCallsLog_AsyncFunctions() {
+        String helloWorld = completableFutureHelloWorld.helloWorldThreeAsyncCallsLog_AsyncFunctions();
+
+        assertEquals("HELLO WORLD! HI, INSIDE COMPLETABLE FUTURE!", helloWorld);
+    }
+
+    @Test
+    void helloWorldThreeAsyncCalls_CustomThreadPool_AsyncFunctions() {
+        String helloWorld = completableFutureHelloWorld.helloWorldThreeAsyncCalls_CustomThreadPool_AsyncFunctions();
+
+        assertEquals("HELLO WORLD! HI, INSIDE COMPLETABLE FUTURE!", helloWorld);
+    }
+
+    @Test
     void helloWorldFourAsyncCalls() {
         String helloWorld = completableFutureHelloWorld.helloWorldFourAsyncCalls();
 
@@ -59,7 +87,16 @@ class CompletableFutureHelloWorldTest {
         CompletableFuture<String> helloWorld = completableFutureHelloWorld.helloWorldCompose();
 
         helloWorld.thenAccept(str -> assertEquals("HELLO WORLD!", str))
-                   .join();
+                .join();
+        timeTaken();
+    }
+
+    @Test
+    void anyOf() {
+        startTimer();
+        String helloWorld = completableFutureHelloWorld.anyOf();
+
+        assertEquals("Hello, World!", helloWorld); // We get from the DB - the least delay
         timeTaken();
     }
 }
