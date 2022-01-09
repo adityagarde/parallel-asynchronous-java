@@ -1,4 +1,4 @@
-package com.learnjava.moviesapiclient.domains;
+package com.learnjava.moviesapiclient.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,8 +1,8 @@
 package com.learnjava.moviesapiclient;
 
-import com.learnjava.moviesapiclient.domains.Movie;
-import com.learnjava.moviesapiclient.domains.MovieInfo;
-import com.learnjava.moviesapiclient.domains.Review;
+import com.learnjava.moviesapiclient.domain.Movie;
+import com.learnjava.moviesapiclient.domain.MovieInfo;
+import com.learnjava.moviesapiclient.domain.Review;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
