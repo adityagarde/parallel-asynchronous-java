@@ -30,8 +30,8 @@ dependencies {
     implementation('org.apache.commons:commons-lang3:3.0')
 
     // Spring WebFlux
-    implementation 'org.springframework:spring-webflux:5.3.9'
-    implementation('io.projectreactor.netty:reactor-netty:1.0.9')
+    implementation 'org.springframework:spring-webflux:5.3.14'
+    implementation 'io.projectreactor.netty:reactor-netty:1.0.14'
 
     //jackson dependencies
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.4'
